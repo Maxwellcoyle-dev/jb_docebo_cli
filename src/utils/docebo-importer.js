@@ -9,6 +9,8 @@ const token = process.env.API_TOKEN;
 
 const doceboImporter = async (data, migrationType) => {
   const { url, httpMethod } = urlBuilder(migrationType);
+  console.log("url", url);
+  console.log("httpMethod", httpMethod);
 
   // Wrap the data in the expected format
   const requestBody = {
