@@ -79,22 +79,26 @@ const startMigration = async (args) => {
   try {
     // Step 1: Handle and parse the CSV file
     console.log("🔄 Parsing CSV file...");
-    const jsonData = await csvParser(options.fileName);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const chunks = await csvParser(options.fileName);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const totalRecords = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
     console.log(
-      `✅ CSV parsed successfully. Found ${jsonData.length} records.`
+      `✅ CSV parsed: ${totalRecords} records in ${chunks.length} chunks`
     );
 
-    // log for valiting data with cool emoji
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Step 2: Validate data
     console.log(`🔄 Validating ${options.migrationType} data...`);
-    const validData = dataValidationRouter(options.migrationType, jsonData);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const validChunks = chunks.map((chunk) =>
+      dataValidationRouter(options.migrationType, chunk)
+    );
+    console.log(`✅ Validation complete`);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Step 2: Confirm before importing
+    // Step 3: Confirm before importing
     if (!options.continue) {
       const shouldContinue = await confirm({
-        message: `Do you want to import ${validData.length} records to Docebo?`,
+        message: `Import ${totalRecords} records to Docebo?`,
       });
 
       if (!shouldContinue) {
@@ -103,10 +107,19 @@ const startMigration = async (args) => {
       }
     }
 
-    // Step 3: Import data to Docebo
-    console.log("🚀 Starting data import to Docebo...");
-    await doceboImporter(jsonData, options.migrationType);
-    console.log("✅ Migration completed successfully!");
+    // Step 4: Import data to Docebo
+    const result = await doceboImporter(validChunks, options.migrationType);
+
+    // Final result handling
+    if (result.summary.successRate === 100) {
+      console.log(
+        `🎉 All ${result.summary.totalRecords} records imported successfully!`
+      );
+    } else {
+      console.log(
+        `⚠️  Migration completed with ${result.summary.failedChunks} failed chunks`
+      );
+    }
   } catch (error) {
     console.error("❌ Error during migration:", error.message);
     process.exit(1);

@@ -48,9 +48,8 @@ const processRecord = (record) => {
   return processedRecord;
 };
 
-const csvParser = async (fileName, chunkSize = 1000, returnChunks = true) => {
+const csvParser = async (fileName, chunkSize = 200) => {
   const filePath = path.join(process.cwd(), fileName);
-  const items = [];
   const parser = fs.createReadStream(filePath).pipe(
     parse({
       columns: true,
@@ -58,25 +57,13 @@ const csvParser = async (fileName, chunkSize = 1000, returnChunks = true) => {
     })
   );
 
-  if (!returnChunks) {
-    for await (const record of parser) {
-      // Process and format dates during parsing
-      const processedRecord = processRecord(record);
-      items.push(processedRecord);
-    }
-
-    return items;
-  }
-
   const chunks = [];
   let currentChunk = [];
-  let recordCount = 0;
 
   for await (const record of parser) {
     // Process and format dates during parsing
     const processedRecord = processRecord(record);
     currentChunk.push(processedRecord);
-    recordCount++;
 
     // When chunk is full, add it to chunks array and start a new one
     if (currentChunk.length === chunkSize) {
