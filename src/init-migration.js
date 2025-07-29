@@ -79,18 +79,12 @@ const initMigration = async (args) => {
     console.log("✅ migration project initiated");
     console.log("");
     console.log("🚀 Next steps:");
-    console.log(
-      "1. To start migration, run: npx @maximousprime/jb_docebo_migration_cli start-migration"
-    );
-    console.log(
-      "2. For help, run: npx @maximousprime/jb_docebo_migration_cli docebo-help"
-    );
+    console.log("1. To start migration, run: docebo start");
+    console.log("2. For help, run: docebo help");
     console.log("");
     console.log("💡 Tip: You can also install globally for easier use:");
-    console.log("   npm install -g @maximousprime/jb_docebo_migration_cli");
-    console.log(
-      "   Then use: start-migration, init-docebo-migration, docebo-help"
-    );
+    console.log("   npm install -g @maximousprime/jb_docebo_cli");
+    console.log("   Then use: docebo start, docebo init, docebo help");
   } else {
     console.log("Exiting the process");
   }

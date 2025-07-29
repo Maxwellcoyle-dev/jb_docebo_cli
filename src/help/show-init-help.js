@@ -1,11 +1,11 @@
 const showInitHelp = () => {
   console.log(`
-📋 init-docebo-migration Command Help
-====================================
+📋 docebo init Command Help
+==========================
 
 Initializes and configures a new Docebo migration project.
 
-Usage: init-docebo-migration [options]
+Usage: docebo init [options]
 
 Options:
   --platform-url, -p    Platform URL for Docebo (e.g., https://your-domain.docebosaas.com)
@@ -14,15 +14,19 @@ Options:
   --help, -h            Show this help message
 
 Examples:
-  init-docebo-migration
-  init-docebo-migration --platform-url https://company.docebosaas.com
-  init-docebo-migration --platform-url https://company.docebosaas.com --api-token abc123
+  docebo init
+  docebo init --platform-url https://company.docebosaas.com
+  docebo init --platform-url https://company.docebosaas.com --api-token abc123
 
 This command will:
 1. Prompt for your Docebo platform URL
 2. Prompt for your API token
 3. Create a .env file with your configuration
 4. Validate your credentials
+
+Prerequisites:
+- Valid Docebo platform URL
+- API token with appropriate permissions
 `);
 };
 

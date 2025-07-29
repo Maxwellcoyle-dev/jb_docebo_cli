@@ -1,21 +1,22 @@
 const showStartHelp = () => {
   console.log(`
-📋 start-migration Command Help
-==============================
+📋 docebo start Command Help
+===========================
 
 Starts the actual migration process using a CSV file.
 
-Usage: start-migration [options]
+Usage: docebo start [options]
 
 Options:
-  --file, -f            Path to the CSV file to import
+  --file-name, -f       Path to the CSV file to import
   --continue, -c        Skip confirmation prompts
+  --migration-type, -t  Type of migration (enrollments)
   --help, -h            Show this help message
 
 Examples:
-  start-migration
-  start-migration --file user_enrollments.csv
-  start-migration --file data.csv --continue
+  docebo start
+  docebo start --file-name user_enrollments.csv
+  docebo start --file-name data.csv --continue
 
 This command will:
 1. Check for required .env configuration
@@ -25,7 +26,7 @@ This command will:
 5. Provide progress updates and results
 
 Prerequisites:
-- Must run init-docebo-migration first
+- Must run docebo init first
 - CSV file must be in the project directory
 - Valid .env file with API_TOKEN and PLATFORM_URL
 `);

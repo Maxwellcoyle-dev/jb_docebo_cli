@@ -41,12 +41,13 @@ This CLI tool helps you migrate data from local CSV files into Docebo.
    Usage: docebo start [options]
    
    Options:
-   --file, -f            Path to the CSV file to import
+   --file-name, -f       Path to the CSV file to import
    --continue, -c        Skip confirmation prompts
+   --migration-type, -t  Type of migration (enrollments)
    --help, -h            Show help for this command
    
    Example:
-   docebo start --file user_enrollments.csv
+   docebo start --file-name user_enrollments.csv
 
 3. docebo help
    Shows this help guide or specific command help.
@@ -130,14 +131,15 @@ Starts the actual migration process using a CSV file.
 Usage: docebo start [options]
 
 Options:
-  --file, -f            Path to the CSV file to import
+  --file-name, -f       Path to the CSV file to import
   --continue, -c        Skip confirmation prompts
+  --migration-type, -t  Type of migration (enrollments)
   --help, -h            Show this help message
 
 Examples:
   docebo start
-  docebo start --file user_enrollments.csv
-  docebo start --file data.csv --continue
+  docebo start --file-name user_enrollments.csv
+  docebo start --file-name data.csv --continue
 
 This command will:
 1. Check for required .env configuration
