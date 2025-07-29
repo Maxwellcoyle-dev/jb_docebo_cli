@@ -97,6 +97,12 @@ const startMigration = async (args) => {
 
     // Step 3: Confirm before importing
     if (!options.continue) {
+      // Show preview of first record
+      console.log("\n📋 Data Preview (first record):");
+      console.log("=".repeat(50));
+      console.log(JSON.stringify(validChunks[0][0], null, 2));
+      console.log("=".repeat(50));
+
       const shouldContinue = await confirm({
         message: `Import ${totalRecords} records to Docebo?`,
       });
