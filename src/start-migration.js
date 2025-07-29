@@ -56,7 +56,7 @@ const promptForMigrationType = async () => {
   return migrationType;
 };
 
-const start = async (args) => {
+const startMigration = async (args) => {
   let options = parseArgumentsIntoOptions(args);
 
   // Show help if requested
