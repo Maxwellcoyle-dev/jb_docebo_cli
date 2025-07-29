@@ -1,22 +1,44 @@
 {
-  "name": "@maximousprime/docebo-cli",
+  "name": "@maximousprime/jb_docebo_cli",
   "version": "1.0.0",
-  "description": "Simple Docebo migration CLI",
+  "description": "A command-line interface for Docebo migration and data management",
   "main": "cli.js",
   "type": "module",
   "bin": {
     "docebo": "cli.js"
   },
   "scripts": {
-    "test": "echo \"No tests specified\""
+    "test": "echo \"No tests specified\"",
+    "start": "node cli.js"
   },
   "keywords": [
     "docebo",
     "cli",
-    "migration"
+    "migration",
+    "lms",
+    "learning-management-system",
+    "data-import",
+    "csv"
   ],
   "author": "Max Henderson",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maxwellcoyle-dev/jb_docebo_cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Maxwellcoyle-dev/jb_docebo_cli/issues"
+  },
+  "homepage": "https://github.com/Maxwellcoyle-dev/jb_docebo_cli#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "cli.js",
+    "commands/",
+    "src/",
+    "README.md"
+  ],
   "dependencies": {
     "@inquirer/prompts": "^7.7.1",
     "arg": "^5.0.2",

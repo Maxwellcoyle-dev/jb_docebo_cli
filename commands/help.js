@@ -9,22 +9,22 @@ This CLI tool helps you migrate data from local CSV files into Docebo.
 
 ❓ Getting Started:
 ==================
-1. Run: init-docebo-migration
+1. Run: docebo init
 2. Follow the prompts to enter your Docebo platform URL and API token
 3. Place your CSV file in the project directory
-4. Run: start-migration
+4. Run: docebo start
 5. Follow the prompts to select the CSV file you want to import and the type of migration you want to perform
 6. Follow the prompts to confirm the data to be imported
 7. Wait for the migration to complete
 8. Check your Docebo platform to see the imported data
 
-�� Available Commands:
+📋 Available Commands:
 =====================
 
-1. init-docebo-migration (or @maximousprime/docebo-migration-cli)
+1. docebo init
    Initializes and configures a new migration project.
    
-   Usage: init-docebo-migration [options]
+   Usage: docebo init [options]
    
    Options:
    --platform-url, -p    Platform URL for Docebo
@@ -33,12 +33,12 @@ This CLI tool helps you migrate data from local CSV files into Docebo.
    --help, -h            Show help for this command
    
    Example:
-   init-docebo-migration --platform-url https://your-domain.docebosaas.com --api-token your-token
+   docebo init --platform-url https://your-domain.docebosaas.com --api-token your-token
 
-2. start-migration
+2. docebo start
    Starts the actual migration process using a CSV file.
    
-   Usage: start-migration [options]
+   Usage: docebo start [options]
    
    Options:
    --file, -f            Path to the CSV file to import
@@ -46,21 +46,21 @@ This CLI tool helps you migrate data from local CSV files into Docebo.
    --help, -h            Show help for this command
    
    Example:
-   start-migration --file user_enrollments.csv
+   docebo start --file user_enrollments.csv
 
-3. docebo-help
+3. docebo help
    Shows this help guide or specific command help.
    
-   Usage: docebo-help [command]
+   Usage: docebo help [command]
    
    Examples:
-   docebo-help                    # Show general help
-   docebo-help init              # Show help for init command
-   docebo-help start             # Show help for start command
+   docebo help                    # Show general help
+   docebo help init              # Show help for init command
+   docebo help start             # Show help for start command
 
 📁 File Structure:
 =================
-After running init-docebo-migration, you'll have:
+After running docebo init, you'll have:
 - .env file with your configuration
 - CSV file(s) ready for import
 
@@ -90,12 +90,12 @@ For issues or questions, please check the documentation or contact support.
 
 function showInitHelp() {
   console.log(`
-📋 init-docebo-migration Command Help
-====================================
+📋 docebo init Command Help
+==========================
 
 Initializes and configures a new Docebo migration project.
 
-Usage: init-docebo-migration [options]
+Usage: docebo init [options]
 
 Options:
   --platform-url, -p    Platform URL for Docebo (e.g., https://your-domain.docebosaas.com)
@@ -104,9 +104,9 @@ Options:
   --help, -h            Show this help message
 
 Examples:
-  init-docebo-migration
-  init-docebo-migration --platform-url https://company.docebosaas.com
-  init-docebo-migration --platform-url https://company.docebosaas.com --api-token abc123
+  docebo init
+  docebo init --platform-url https://company.docebosaas.com
+  docebo init --platform-url https://company.docebosaas.com --api-token abc123
 
 This command will:
 1. Prompt for your Docebo platform URL
@@ -122,12 +122,12 @@ Prerequisites:
 
 function showStartHelp() {
   console.log(`
-📋 start-migration Command Help
-==============================
+📋 docebo start Command Help
+===========================
 
 Starts the actual migration process using a CSV file.
 
-Usage: start-migration [options]
+Usage: docebo start [options]
 
 Options:
   --file, -f            Path to the CSV file to import
@@ -135,9 +135,9 @@ Options:
   --help, -h            Show this help message
 
 Examples:
-  start-migration
-  start-migration --file user_enrollments.csv
-  start-migration --file data.csv --continue
+  docebo start
+  docebo start --file user_enrollments.csv
+  docebo start --file data.csv --continue
 
 This command will:
 1. Check for required .env configuration
@@ -147,24 +147,22 @@ This command will:
 5. Provide progress updates and results
 
 Prerequisites:
-- Must run init-docebo-migration first
+- Must run docebo init first
 - CSV file must be in the project directory
 - Valid .env file with API_TOKEN and PLATFORM_URL
 `);
 }
 
 // Main help function
-function showHelp() {
+export function help() {
   const args = process.argv.slice(2);
   const command = args[0];
 
   switch (command) {
     case "init":
-    case "init-docebo-migration":
       showInitHelp();
       break;
     case "start":
-    case "start-migration":
       showStartHelp();
       break;
     default:
@@ -172,4 +170,7 @@ function showHelp() {
   }
 }
 
-showHelp();
+// If this file is run directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  help();
+}

@@ -2,4 +2,11 @@
 
 import startMigration from "../src/start-migration.js";
 
-startMigration(process.argv);
+export function start() {
+  startMigration(process.argv);
+}
+
+// If this file is run directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  start();
+}
