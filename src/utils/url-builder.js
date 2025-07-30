@@ -1,8 +1,13 @@
-const baseUrl = process.env.PLATFORM_URL;
-
-const cleanBase = baseUrl.replace(/\/+$/, "");
-
 const urlBuilder = (migrationType) => {
+  const baseUrl = process.env.PLATFORM_URL;
+
+  if (!baseUrl) {
+    // Return empty string if no environment variable is set
+    return { url: "", httpMethod: "POST" };
+  }
+
+  const cleanBase = baseUrl.replace(/\/+$/, "");
+
   switch (migrationType) {
     case "enrollments":
       const path = "/learn/v1/enrollment/batch";

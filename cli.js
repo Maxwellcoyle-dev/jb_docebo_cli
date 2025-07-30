@@ -1,22 +1,21 @@
 #!/usr/bin/env node
 
-import { init } from "./commands/init.js";
-import { start } from "./commands/start.js";
-import { help } from "./commands/help.js";
-
 const command = process.argv[2];
 
 switch (command) {
   case "init":
+    const { init } = await import("./commands/init.js");
     init();
     break;
   case "start":
+    const { start } = await import("./commands/start.js");
     start();
     break;
   case "help":
   case "--help":
   case "-h":
   case undefined:
+    const { help } = await import("./commands/help.js");
     help();
     break;
   default:
